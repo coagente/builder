@@ -35,43 +35,69 @@ Monitoring: Prometheus + Grafana
 - Docker & Docker Compose
 - Git
 
-### Instalación Local
+### 🐳 **Instalación con Docker (Recomendado)**
 
 ```bash
-# Clonar repositorio
+# 1. Clonar repositorio
 git clone https://github.com/coagente/builder.git
 cd builder
 
-# Setup del entorno
-make install
+# 2. Setup completo automático
+make setup
 
-# Configurar variables de entorno
-cp .env.example .env.local
-# Editar .env.local con tus API keys
+# 3. Configurar API key de Google AI
+cp env.example .env.local
+# Editar .env.local: GOOGLE_AI_API_KEY=tu_api_key_aqui
 
-# Ejecutar en desarrollo
+# 4. Ejecutar en desarrollo
 make dev
 ```
 
-### Con Docker
+### 📡 **URLs de Desarrollo**
+- **API**: http://localhost:8000
+- **API Docs**: http://localhost:8000/docs  
+- **Redis Admin**: http://localhost:8001
+- **Health Check**: http://localhost:8000/health
+
+### 🛠️ **Comandos Principales**
 
 ```bash
-# Construir y ejecutar
-make build
-make dev
+# Desarrollo
+make dev              # Ejecutar con logs
+make dev-detached    # Ejecutar en background
+make health          # Verificar estado
+make logs           # Ver logs
 
-# Ver logs
-make logs
+# Base de datos
+make shell-db       # Acceso PostgreSQL
+make shell-redis    # Acceso Redis CLI
 
-# Parar servicios
-make clean
+# Control
+make stop           # Parar servicios
+make restart        # Reiniciar
+make down          # Parar y limpiar
+```
+
+### 💻 **Instalación Local (Sin Docker)**
+
+```bash
+# Setup del entorno Python
+make install-dev
+
+# Configurar variables de entorno
+cp env.example .env.local
+# Configurar base de datos local y Redis
+
+# Ejecutar tests
+make test-fast
 ```
 
 ## 📚 **Documentación**
 
-- [📋 TODO.md](./TODO.md) - Lista completa de tareas
-- [📖 PRD.md](./PRD.md) - Especificación técnica completa
-- [🏗️ docs/](./docs/) - Documentación detallada
+- [📋 TODO.md](./TODO.md) - Lista completa de tareas y progreso
+- [📖 PRD.md](./PRD.md) - Especificación técnica completa  
+- [🐳 README-DOCKER.md](./README-DOCKER.md) - Setup Docker detallado
+- [🏗️ docs/](./docs/) - Documentación técnica adicional
 
 ## 🎯 **Roadmap**
 
@@ -89,9 +115,10 @@ make clean
 
 ## 📊 **Estado del Proyecto**
 
-- **Fase Actual**: 0 - Setup Inicial
-- **Progreso**: 🟡 En desarrollo
-- **Próximo Milestone**: Infraestructura base
+- **Fase Actual**: 1 - Infraestructura Base (Docker Completo)
+- **Progreso**: 🔄 En desarrollo activo  
+- **Completado**: ✅ Fase 0 + 🐳 Docker Stack completo
+- **Próximo Milestone**: FastAPI + Base de datos
 
 ## 🤝 **Contribuir**
 
