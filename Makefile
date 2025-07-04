@@ -16,7 +16,7 @@ help: ## 📋 Mostrar comandos disponibles
 setup: ## 🚀 Setup inicial (copia env y prepara proyecto)
 	@echo "🚀 Configurando Despiece-Bot Simple AI..."
 	@if [ ! -f .env.local ]; then \
-		cp env.template .env.local; \
+		cp .env.example .env.local; \
 		echo "✅ Archivo .env.local creado"; \
 		echo "📝 IMPORTANTE: Edita .env.local y agrega tu GOOGLE_AI_API_KEY"; \
 	else \
@@ -39,7 +39,7 @@ dev: ## 🔥 Ejecutar en desarrollo con logs
 	@echo "🔥 Iniciando servidor de desarrollo..."
 	docker-compose -f docker-compose.dev.yml up
 
-dev-detached: ## 🌙 Ejecutar en desarrollo (background)
+dev-detached: ## �� Ejecutar en desarrollo (background)
 	@echo "🌙 Iniciando servidor en background..."
 	docker-compose -f docker-compose.dev.yml up -d
 	@echo "✅ Servidor ejecutándose en: http://localhost:8000"
