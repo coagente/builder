@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  # =============================================================================
+  # DESPIECE-BOT - Desarrollo Simple (Solo AI Stack)
+  # =============================================================================
+  api:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: despiece-api-dev
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./src:/app/src
+      - ./data:/app/data
+      - ./.env.local:/app/.env
+    environment:
+      - ENVIRONMENT=development
+      - DEBUG=true
+      - LOG_LEVEL=DEBUG
+      - GOOGLE_AI_API_KEY=${GOOGLE_AI_API_KEY}
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    command: ["uvicorn", "src.despiece_bot.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload", "--log-level", "debug"]
+
+# =============================================================================
+# VOLUMES
+# =============================================================================
+volumes:
+  data_volume:
+    driver: local
